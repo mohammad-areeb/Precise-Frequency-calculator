@@ -1,36 +1,39 @@
-# Frequency Sweeping and Detection with ESP32
 
-This repository contains code for frequency sweeping and detection implemented on an ESP32 microcontroller. The code utilizes ultrasonic sensors for frequency measurement and infrared sensors for inter-robot communication.
+# Vibrating Wire Sensor Frequency Analyzer
 
 ## Overview
-
-The main objective of this project is to perform frequency sweeping and detection using an ESP32 microcontroller. The code allows the microcontroller to sweep across a range of frequencies, detect the frequency of received signals, and communicate with other robots using infrared sensors.
-
-## Features
-* Frequency sweeping across a specified range
-* Frequency detection using ultrasonic sensors
-* Inter-robot communication using infrared sensors
-* Coarse and fine frequency sweeping modes
-* Constant frequency mode
-* Automatic adjustment of sweeping parameters based on detected frequencies
+This code is designed to analyze the frequency input from a vibrating wire sensor and provide an output frequency based on the analysis. The vibrating wire sensor typically measures environmental factors like temperature, pressure, or stress, and translates them into frequency variations.
 
 ## Hardware Requirements
-* ESP32 microcontroller
-* Ultrasonic sensor for frequency measurement
-* Infrared sensor for inter-robot communication
-* LED for visual indication (optional)
+* Arduino or compatible microcontroller board
+* Vibrating wire sensor
+* Necessary wiring connections
+
+## Software Requirements
+* Arduino IDE (Integrated Development Environment)
+
+## Installation and Setup
+1. Connect the vibrating wire sensor to the microcontroller board according to the wiring instructions.
+2. Open the Arduino IDE and create a new sketch.
+3. Copy and paste the provided code into the sketch.
+4. Verify and upload the code to the microcontroller board.
 
 ## Usage
-1. Connect the ultrasonic and infrared sensors to the ESP32 microcontroller as per the hardware setup.
-2. Upload the provided code (sweep_detection.ino) to the ESP32 microcontroller using the Arduino IDE or any compatible development environment.
-3. Power on the microcontroller and observe the frequency sweeping and detection behavior.
-4. Monitor the serial output for frequency measurements and communication status.
+* Upon uploading the code, the microcontroller will start analyzing the frequency input from the vibrating wire sensor.
+* The analyzed frequency data will be displayed through the serial monitor, providing insights into the environmental factors being measured by the sensor.
+* Users can adjust parameters such as the frequency range and resolution within the code as needed.
+* Ensure that the hardware connections are secure and the sensor is functioning properly for accurate results.
 
-## Code Structure
-* sweep_detection.ino: Main Arduino sketch file containing the setup and loop functions.
-* swarm_robot.h: Header file defining the SwarmRobot class for frequency sweeping and detection.
-* swarm_robot.cpp: Implementation file for the SwarmRobot class methods.
+## Code Explanation
+* The code defines necessary variables, pins, and interrupt handlers required for capturing frequency data.
+* It sets up the necessary configurations and initializes the serial communication.
+* The handleInterrupt() function is triggered by an interrupt when a falling edge is detected on the input pin. It calculates the period between successive interrupts.
+* The sort() function sorts the period data for further analysis.
+* The loop() function continuously reads the frequency data, sorts it, calculates the frequency distribution, and identifies the highest frequency elements.
+* Based on the highest frequency elements, the code computes an average frequency, which is then used to calculate and display the output frequency.
+* The process repeats in a loop, providing real-time frequency analysis.
 
-## Contributing
-
-Contributions to this project are welcome! If you find any bugs or have suggestions for improvements, please feel free to open an issue or submit a pull request.
+## Notes
+* Ensure proper calibration of the vibrating wire sensor for accurate frequency measurements.
+* Adjust the code parameters according to the specific requirements of the sensor and application.
+* For troubleshooting or further customization, refer to the Arduino documentation and resources.
